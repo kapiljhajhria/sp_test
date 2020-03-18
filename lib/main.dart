@@ -59,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
   }
   void _incrementCounter() async{
-    await prefs.setInt("counter",counter);
+    await prefs.setInt("counter",counter+1);
     setState(() {
       // This call to setState tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below
@@ -71,10 +71,9 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   getSharedPreferenceData() async {
-    prefs = await SharedPreferences.getInstance().whenComplete((){
-      if(prefs.containsKey("counter"))
-        counter=prefs.getInt("counter");
-    });
+    prefs = await SharedPreferences.getInstance();
+    if(prefs.containsKey("counter"))
+      counter=prefs.getInt("counter");
     setState(() {});
   }
 
